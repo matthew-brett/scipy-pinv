@@ -1,4 +1,7 @@
 import numpy as np
+import numpy.linalg as npl
+import scipy
+import scipy.linalg as spl
 
 import sympy as sy
 
@@ -42,6 +45,13 @@ print_scalar(max_diff(s_piX, sp16['piX']))
 print_scalar(max_diff(s_piX, sp17['piX']))
 print_scalar(sum_abs_diff(s_piX, sp16['piX']))
 print_scalar(sum_abs_diff(s_piX, sp17['piX']))
+print('Sympy high-precision pinv SSE')
 print_scalar(sse(X, s_piX, y))
+print('Local numpy {} linalg pinv'.format(np.__version__))
+print_scalar(sse(X, npl.pinv(X), y))
+print('Local scipy {} linalg pinv'.format(scipy.__version__))
+print_scalar(sse(X, spl.pinv(X), y))
+print('Scipy 0.16 linalg pinv, stored')
 print_scalar(sse(X, sp16['piX'], y))
+print('Scipy 0.17 linalg pinv, stored')
 print_scalar(sse(X, sp17['piX'], y))
